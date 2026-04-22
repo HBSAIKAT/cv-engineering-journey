@@ -15,5 +15,16 @@
   - Behaviors are actions (7)
   - Hiding details and creating the public interface (9)
   - Composition
-- **Duration**: 11pm – 12:50pm
+- **Duration**: 11am – 12:50pm
 - **Mindset**: Building strong OOP foundations for future CV pipelines.
+
+
+### 2026-04-22 | Day 3 | Python 3 OOP - Chapter 1
+- **Action**: Read Chapter 1: Object-oriented Design from *Python 3 Object-Oriented Programming* (2nd Edition) by Dusty Phillips
+
+- **Sections covered**:
+  - Revised previous days' topics and created detailed notes for each; saved as a Markdown file in the Python OOP folder.
+  - Inheritence 
+- **Duration**: 7pm – 9:00pm
+- **Mindset**: Building strong OOP foundations for future CV pipelines.
+- **Next will cover**: Cover the Chapter 1 Case Study section and Exercises.
