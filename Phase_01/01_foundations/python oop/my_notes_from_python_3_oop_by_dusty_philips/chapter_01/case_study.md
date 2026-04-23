@@ -47,10 +47,10 @@ ContributorWithType (Composition)
 
 2. Inheritance Hierarchy
 
-LibraryItem
- ├── Book
- ├── DVD
- ├── Magazine
+LibraryItem <br>
+ ├── Book<br>
+ ├── DVD<br>
+ ├── Magazine<br>
  └── CD
 
 3. Sequence Flow
