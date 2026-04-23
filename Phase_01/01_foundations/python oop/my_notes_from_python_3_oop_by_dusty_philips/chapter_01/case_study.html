@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Library Catalog — OOP Design</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Syne:wght@400;700;800&display=swap');
+
+  :root {
+    --bg: #0a0a0f;
+    --surface: #111118;
+    --border: #1e1e2e;
+    --accent: #7c3aed;
+    --accent2: #06b6d4;
+    --accent3: #f59e0b;
+    --accent4: #10b981;
+    --text: #e2e8f0;
+    --muted: #64748b;
+    --card: #13131f;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Syne', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Noise texture overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 48px 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Header */
+  .header {
+    text-align: center;
+    margin-bottom: 64px;
+    animation: fadeUp 0.7s ease both;
+  }
+
+  .header .tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .header h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    line-height: 1.1;
+    background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .header p {
+    margin-top: 12px;
+    color: var(--muted);
+    font-size: 15px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* Tab Nav */
+  .tabs {
+    display: flex;
+    gap: 4px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 6px;
+    margin-bottom: 40px;
+    animation: fadeUp 0.7s 0.1s ease both;
+    flex-wrap: wrap;
+  }
+
+  .tab-btn {
+    flex: 1;
+    min-width: 120px;
+    padding: 10px 16px;
+    border: none;
+    background: transparent;
+    color: var(--muted);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+
+  .tab-btn:hover { color: var(--text); background: var(--border); }
+
+  .tab-btn.active {
+    background: var(--accent);
+    color: #fff;
+  }
+
+  /* Panels */
+  .panel { display: none; animation: fadeUp 0.4s ease both; }
+  .panel.active { display: block; }
+
+  /* Class Card */
+  .class-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    margin-bottom: 32px;
+  }
+
+  .class-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: transform 0.2s, border-color 0.2s;
+    position: relative;
+  }
+
+  .class-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent);
+  }
+
+  .class-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+  }
+
+  .class-card.purple::before { background: var(--accent); }
+  .class-card.cyan::before { background: var(--accent2); }
+  .class-card.amber::before { background: var(--accent3); }
+  .class-card.green::before { background: var(--accent4); }
+  .class-card.red::before { background: #ef4444; }
+
+  .card-header {
+    padding: 20px 20px 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .card-type {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .card-name {
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  .class-card.purple .card-name { color: #a78bfa; }
+  .class-card.cyan .card-name { color: #67e8f9; }
+  .class-card.amber .card-name { color: #fcd34d; }
+  .class-card.green .card-name { color: #6ee7b7; }
+  .class-card.red .card-name { color: #fca5a5; }
+
+  .card-body { padding: 16px 20px 20px; }
+
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    margin-top: 14px;
+  }
+
+  .attr-list, .method-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .attr-list li, .method-list li {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .attr-list li { background: rgba(124,58,237,0.08); color: #c4b5fd; }
+  .method-list li { background: rgba(6,182,212,0.08); color: #67e8f9; }
+
+  .class-card.amber .attr-list li { background: rgba(245,158,11,0.08); color: #fcd34d; }
+  .class-card.amber .method-list li { background: rgba(6,182,212,0.08); color: #67e8f9; }
+  .class-card.green .attr-list li { background: rgba(16,185,129,0.08); color: #6ee7b7; }
+  .class-card.red .attr-list li { background: rgba(239,68,68,0.08); color: #fca5a5; }
+
+  .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+  .dot-attr { background: #7c3aed; }
+  .dot-method { background: #06b6d4; }
+
+  /* Relationship diagram */
+  .rel-diagram {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px;
+    margin-bottom: 20px;
+  }
+
+  .rel-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  svg.diagram {
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+
+  /* Sequence steps */
+  .sequence {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .seq-step {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    position: relative;
+    padding-bottom: 24px;
+  }
+
+  .seq-step:not(:last-child)::before {
+    content: '';
+    position: absolute;
+    left: 20px;
+    top: 44px;
+    bottom: 0;
+    width: 2px;
+    background: var(--border);
+  }
+
+  .seq-num {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    font-weight: 700;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  .seq-content {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 20px;
+    flex: 1;
+  }
+
+  .seq-actors {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 6px;
+    flex-wrap: wrap;
+  }
+
+  .actor-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-weight: 600;
+  }
+
+  .arrow-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    padding: 2px 8px;
+    background: var(--border);
+    border-radius: 4px;
+  }
+
+  .seq-desc {
+    font-size: 13px;
+    color: var(--muted);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* Comparison */
+  .compare-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 24px;
+  }
+
+  @media(max-width: 600px) { .compare-grid { grid-template-columns: 1fr; } }
+
+  .compare-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+  }
+
+  .compare-card.bad { border-color: rgba(239,68,68,0.3); }
+  .compare-card.good { border-color: rgba(16,185,129,0.3); }
+
+  .compare-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .compare-card.bad .compare-label { color: #ef4444; }
+  .compare-card.good .compare-label { color: #10b981; }
+
+  .compare-card h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+
+  .code-block {
+    background: #0d0d1a;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    line-height: 1.7;
+    color: #94a3b8;
+    margin: 12px 0;
+  }
+
+  .code-block .kw { color: #a78bfa; }
+  .code-block .cls { color: #67e8f9; }
+  .code-block .str { color: #6ee7b7; }
+  .code-block .comment { color: #475569; }
+
+  .verdict {
+    font-size: 13px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    margin-top: 12px;
+  }
+  .compare-card.bad .verdict { background: rgba(239,68,68,0.08); color: #fca5a5; }
+  .compare-card.good .verdict { background: rgba(16,185,129,0.08); color: #6ee7b7; }
+
+  /* Insight box */
+  .insight {
+    background: linear-gradient(135deg, rgba(124,58,237,0.1), rgba(6,182,212,0.05));
+    border: 1px solid rgba(124,58,237,0.3);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-top: 16px;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .insight strong { color: var(--accent2); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .badge-purple { background: rgba(124,58,237,0.2); color: #a78bfa; border: 1px solid rgba(124,58,237,0.3); }
+  .badge-cyan { background: rgba(6,182,212,0.2); color: #67e8f9; border: 1px solid rgba(6,182,212,0.3); }
+  .badge-amber { background: rgba(245,158,11,0.2); color: #fcd34d; border: 1px solid rgba(245,158,11,0.3); }
+  .badge-green { background: rgba(16,185,129,0.2); color: #6ee7b7; border: 1px solid rgba(16,185,129,0.3); }
+
+  .inherit-tree {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px;
+    margin-bottom: 20px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .tree-node {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 18px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    border: 2px solid;
+  }
+
+  .tree-center { display: flex; justify-content: center; margin-bottom: 8px; }
+  .tree-line {
+    display: flex;
+    justify-content: center;
+    color: var(--muted);
+    font-size: 20px;
+    margin: 2px 0;
+  }
+
+  .tree-children {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <span class="tag">Chapter 1 · Case Study</span>
+    <h1>Library Catalog<br>OOP Design</h1>
+    <p>// object-oriented analysis & design visualization</p>
+  </div>
+
+  <div class="tabs">
+    <button class="tab-btn active" onclick="showTab('classes')">📦 Classes</button>
+    <button class="tab-btn" onclick="showTab('inheritance')">🌳 Inheritance</button>
+    <button class="tab-btn" onclick="showTab('sequence')">🔄 Sequence</button>
+    <button class="tab-btn" onclick="showTab('refactor')">⚡ Refactoring</button>
+  </div>
+
+  <!-- TAB 1: CLASSES -->
+  <div class="panel active" id="tab-classes">
+    <div class="class-grid">
+
+      <div class="class-card purple">
+        <div class="card-header">
+          <div class="card-type">«abstract»</div>
+          <div class="card-name">LibraryItem</div>
+        </div>
+        <div class="card-body">
+          <div class="section-label">— attributes</div>
+          <ul class="attr-list">
+            <li><span class="dot dot-attr"></span>title: String</li>
+            <li><span class="dot dot-attr"></span>subject: String</li>
+            <li><span class="dot dot-attr"></span>upc: String</li>
+          </ul>
+          <div class="section-label">— methods</div>
+          <ul class="method-list">
+            <li><span class="dot dot-method"></span>locate() → String</li>
+            <li><span class="dot dot-method"></span>getInfo() → String</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="class-card cyan">
+        <div class="card-header">
+          <div class="card-type">«extends LibraryItem»</div>
+          <div class="card-name">Book</div>
+        </div>
+        <div class="card-body">
+          <div class="section-label">— attributes</div>
+          <ul class="attr-list">
+            <li><span class="dot dot-attr"></span>isbn: String</li>
+            <li><span class="dot dot-attr"></span>ddsNumber: String</li>
+            <li><span class="dot dot-attr"></span>contributors: List</li>
+          </ul>
+          <div class="section-label">— methods</div>
+          <ul class="method-list">
+            <li><span class="dot dot-method"></span>locate() → "Shelf " + dds</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="class-card amber">
+        <div class="card-header">
+          <div class="card-type">«extends LibraryItem»</div>
+          <div class="card-name">DVD</div>
+        </div>
+        <div class="card-body">
+          <div class="section-label">— attributes</div>
+          <ul class="attr-list">
+            <li><span class="dot dot-attr"></span>genre: String</li>
+            <li><span class="dot dot-attr"></span>runtime: int</li>
+            <li><span class="dot dot-attr"></span>contributors: List</li>
+          </ul>
+          <div class="section-label">— methods</div>
+          <ul class="method-list">
+            <li><span class="dot dot-method"></span>locate() → "Section " + genre</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="class-card green">
+        <div class="card-header">
+          <div class="card-type">«extends LibraryItem»</div>
+          <div class="card-name">Magazine</div>
+        </div>
+        <div class="card-body">
+          <div class="section-label">— attributes</div>
+          <ul class="attr-list">
+            <li><span class="dot dot-attr"></span>volume: int</li>
+            <li><span class="dot dot-attr"></span>issue: int</li>
+            <li><span class="dot dot-attr"></span>publisher: String</li>
+          </ul>
+          <div class="section-label">— methods</div>
+          <ul class="method-list">
+            <li><span class="dot dot-method"></span>locate() → "Vol."+vol+" #"+issue</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="class-card cyan" style="border-color:rgba(6,182,212,0.4)">
+        <div class="card-header">
+          <div class="card-type">«manager class»</div>
+          <div class="card-name">Catalog</div>
+        </div>
+        <div class="card-body">
+          <div class="section-label">— attributes</div>
+          <ul class="attr-list">
+            <li><span class="dot dot-attr"></span>items: List&lt;LibraryItem&gt;</li>
+          </ul>
+          <div class="section-label">— methods</div>
+          <ul class="method-list">
+            <li><span class="dot dot-method"></span>searchByTitle(t)</li>
+            <li><span class="dot dot-method"></span>searchByAuthor(a)</li>
+            <li><span class="dot dot-method"></span>searchBySubject(s)</li>
+            <li><span class="dot dot-method"></span>addItem(item)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="class-card red">
+        <div class="card-header">
+          <div class="card-type">«composition»</div>
+          <div class="card-name">ContributorWithType</div>
+        </div>
+        <div class="card-body">
+          <div class="section-label">— attributes</div>
+          <ul class="attr-list">
+            <li><span class="dot dot-attr"></span>contributor: Contributor</li>
+            <li><span class="dot dot-attr"></span>type: String</li>
+          </ul>
+          <div class="section-label">— type examples</div>
+          <ul class="method-list">
+            <li><span class="dot dot-method"></span>"Author" | "Actor"</li>
+            <li><span class="dot dot-method"></span>"Director" | "Artist"</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="insight">
+      💡 <strong>Catalog</strong> শুধু <code>LibraryItem</code> জানে — Book, DVD, Magazine আলাদাভাবে চেনে না। এটাই <strong>Polymorphism</strong>-এর শক্তি।
+    </div>
+  </div>
+
+  <!-- TAB 2: INHERITANCE -->
+  <div class="panel" id="tab-inheritance">
+    <div class="inherit-tree">
+      <div style="font-size:11px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:24px;">Inheritance Hierarchy</div>
+
+      <div class="tree-center">
+        <div class="tree-node" style="border-color:#7c3aed;background:rgba(124,58,237,0.1);color:#a78bfa;">
+          🏛 LibraryItem (abstract)
+        </div>
+      </div>
+      <div class="tree-line">│</div>
+      <div class="tree-line" style="font-size:14px;letter-spacing:8px;color:#7c3aed;">├───────┬───────┤</div>
+      <div class="tree-children">
+        <div class="tree-node" style="border-color:#06b6d4;background:rgba(6,182,212,0.1);color:#67e8f9;">
+          📚 Book
+        </div>
+        <div class="tree-node" style="border-color:#f59e0b;background:rgba(245,158,11,0.1);color:#fcd34d;">
+          💿 DVD
+        </div>
+        <div class="tree-node" style="border-color:#10b981;background:rgba(16,185,129,0.1);color:#6ee7b7;">
+          📰 Magazine
+        </div>
+        <div class="tree-node" style="border-color:#ec4899;background:rgba(236,72,153,0.1);color:#f9a8d4;">
+          🎵 CD
+        </div>
+      </div>
+
+      <div style="margin-top:32px;padding-top:24px;border-top:1px solid var(--border);">
+        <div style="font-size:11px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;">Shared via LibraryItem</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <span class="actor-badge badge-purple">title</span>
+          <span class="actor-badge badge-purple">subject</span>
+          <span class="actor-badge badge-purple">upc</span>
+          <span class="actor-badge badge-cyan">locate()</span>
+          <span class="actor-badge badge-cyan">getInfo()</span>
+        </div>
+      </div>
+
+      <div style="margin-top:24px;padding-top:24px;border-top:1px solid var(--border);">
+        <div style="font-size:11px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;">Polymorphism in action</div>
+        <div class="code-block">
+<span class="comment">// Catalog শুধু LibraryItem জানে</span>
+<span class="kw">for</span> (LibraryItem item : catalog.search(<span class="str">"Humayun Ahmed"</span>)) {
+    <span class="comment">// Book হোক, DVD হোক — সবাই নিজের মতো locate() দেয়</span>
+    System.out.println(item.<span class="cls">locate()</span>);
+}
+        </div>
+      </div>
+    </div>
+
+    <div class="insight">
+      💡 <strong>Inheritance</strong> মানে — parent-এর সব কিছু পাওয়া। <strong>Polymorphism</strong> মানে — একই method call করলে, প্রতিটা child নিজের মতো করে respond করে।
+    </div>
+  </div>
+
+  <!-- TAB 3: SEQUENCE -->
+  <div class="panel" id="tab-sequence">
+    <div class="rel-diagram">
+      <div class="rel-title">// sequence diagram — search flow</div>
+      <div class="sequence">
+
+        <div class="seq-step">
+          <div class="seq-num" style="background:rgba(124,58,237,0.2);color:#a78bfa;border:2px solid rgba(124,58,237,0.4);">1</div>
+          <div class="seq-content">
+            <div class="seq-actors">
+              <span class="actor-badge badge-amber">User</span>
+              <span style="color:var(--muted);font-size:18px;">→</span>
+              <span class="actor-badge badge-cyan">Catalog</span>
+              <span class="arrow-label">search("Humayun Ahmed")</span>
+            </div>
+            <div class="seq-desc">User search bar থেকে author নাম দিয়ে request পাঠায়</div>
+          </div>
+        </div>
+
+        <div class="seq-step">
+          <div class="seq-num" style="background:rgba(6,182,212,0.2);color:#67e8f9;border:2px solid rgba(6,182,212,0.4);">2</div>
+          <div class="seq-content">
+            <div class="seq-actors">
+              <span class="actor-badge badge-cyan">Catalog</span>
+              <span style="color:var(--muted);font-size:18px;">→</span>
+              <span class="actor-badge badge-purple">LibraryItem[ ]</span>
+              <span class="arrow-label">filter by contributor</span>
+            </div>
+            <div class="seq-desc">Catalog তার item list loop করে matching items খোঁজে</div>
+          </div>
+        </div>
+
+        <div class="seq-step">
+          <div class="seq-num" style="background:rgba(16,185,129,0.2);color:#6ee7b7;border:2px solid rgba(16,185,129,0.4);">3</div>
+          <div class="seq-content">
+            <div class="seq-actors">
+              <span class="actor-badge badge-cyan">Catalog</span>
+              <span style="color:var(--muted);font-size:18px;">→</span>
+              <span class="actor-badge badge-purple">each Item</span>
+              <span class="arrow-label">locate()</span>
+            </div>
+            <div class="seq-desc">প্রতিটা matching item-কে locate() call করে — Book তার DDS দেয়, DVD তার Genre দেয়</div>
+          </div>
+        </div>
+
+        <div class="seq-step">
+          <div class="seq-num" style="background:rgba(245,158,11,0.2);color:#fcd34d;border:2px solid rgba(245,158,11,0.4);">4</div>
+          <div class="seq-content">
+            <div class="seq-actors">
+              <span class="actor-badge badge-purple">Item[ ]</span>
+              <span style="color:var(--muted);font-size:18px;">→</span>
+              <span class="actor-badge badge-cyan">Catalog</span>
+              <span class="arrow-label">location: String</span>
+            </div>
+            <div class="seq-desc">Items তাদের location return করে Catalog-এ</div>
+          </div>
+        </div>
+
+        <div class="seq-step">
+          <div class="seq-num" style="background:rgba(239,68,68,0.2);color:#fca5a5;border:2px solid rgba(239,68,68,0.4);">5</div>
+          <div class="seq-content">
+            <div class="seq-actors">
+              <span class="actor-badge badge-cyan">Catalog</span>
+              <span style="color:var(--muted);font-size:18px;">→</span>
+              <span class="actor-badge badge-amber">User</span>
+              <span class="arrow-label">results[ ]</span>
+            </div>
+            <div class="seq-desc">Catalog সব results একসাথে User-কে দেখায়</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="insight">
+      💡 <strong>Class Diagram</strong> বলে "কে কে আছে" — <strong>Sequence Diagram</strong> বলে "কে কার সাথে কীভাবে কথা বলে"। দুটো মিলে পুরো picture পাওয়া যায়।
+    </div>
+  </div>
+
+  <!-- TAB 4: REFACTORING -->
+  <div class="panel" id="tab-refactor">
+    <div class="compare-grid">
+      <div class="compare-card bad">
+        <div class="compare-label">❌ Bad — Inheritance</div>
+        <h3>Spaghetti Design</h3>
+        <div class="code-block">
+<span class="comment">// আলাদা subclass প্রতি role-এর জন্য</span>
+<span class="kw">class</span> <span class="cls">Author</span> <span class="kw">extends</span> <span class="cls">Contributor</span> { }
+<span class="kw">class</span> <span class="cls">Actor</span> <span class="kw">extends</span> <span class="cls">Contributor</span> { }
+<span class="kw">class</span> <span class="cls">Director</span> <span class="kw">extends</span> <span class="cls">Contributor</span> { }
+<span class="kw">class</span> <span class="cls">Artist</span> <span class="kw">extends</span> <span class="cls">Contributor</span> { }
+<span class="comment">// নতুন role? → নতুন class বানাও!</span>
+        </div>
+        <div class="verdict">🍝 নতুন role আসলে নতুন class। Class বাড়তেই থাকে। Maintain করা nightmare।</div>
+      </div>
+
+      <div class="compare-card good">
+        <div class="compare-label">✅ Good — Composition</div>
+        <h3>Clean Design</h3>
+        <div class="code-block">
+<span class="comment">// একটাই class, type দিয়ে role ঠিক হয়</span>
+<span class="kw">class</span> <span class="cls">ContributorWithType</span> {
+    <span class="cls">Contributor</span> person;
+    <span class="cls">String</span> type; <span class="comment">// "Author","Actor"...</span>
+}
+
+<span class="comment">// নতুন role? শুধু নতুন String!</span>
+        </div>
+        <div class="verdict">✨ নতুন role = নতুন String value। Class structure change করতে হয় না।</div>
+      </div>
+    </div>
+
+    <div class="rel-diagram">
+      <div class="rel-title">// composition relationship</div>
+      <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;justify-content:center;padding:16px 0;">
+        <div class="tree-node" style="border-color:#06b6d4;background:rgba(6,182,212,0.1);color:#67e8f9;">
+          📚 Book
+        </div>
+        <div style="font-family:'JetBrains Mono',monospace;color:var(--muted);">has many →</div>
+        <div class="tree-node" style="border-color:#ef4444;background:rgba(239,68,68,0.1);color:#fca5a5;">
+          🔗 ContributorWithType
+        </div>
+        <div style="font-family:'JetBrains Mono',monospace;color:var(--muted);">links to →</div>
+        <div class="tree-node" style="border-color:#f59e0b;background:rgba(245,158,11,0.1);color:#fcd34d;">
+          👤 Contributor
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:16px;">
+        <div style="display:inline-flex;gap:8px;flex-wrap:wrap;justify-content:center;">
+          <span class="actor-badge badge-purple">type = "Author"</span>
+          <span class="actor-badge badge-cyan">type = "Actor"</span>
+          <span class="actor-badge badge-amber">type = "Director"</span>
+          <span class="actor-badge badge-green">type = "Artist"</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="insight">
+      💡 <strong>Refactoring</strong> মানে বাইরে থেকে কাজ same, কিন্তু ভেতরের design পরিষ্কার। <strong>Composition</strong> বলে — "object ধরো, extend করো না।" এটাই OOP-এর real mastery।
+    </div>
+  </div>
+
+</div>
+
+<script>
+function showTab(name) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>
+</body>
+</html>
