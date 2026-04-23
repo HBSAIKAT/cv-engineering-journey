@@ -28,3 +28,14 @@
 - **Duration**: 7pm – 9:00pm
 - **Mindset**: Building strong OOP foundations for future CV pipelines.
 - **Next will cover**: Cover the Chapter 1 Case Study section and Exercises.
+
+
+### 2026-04-23 | Day 4 | Python 3 OOP - Chapter 1
+- **Action**: Read Chapter 1: Object-oriented Design from *Python 3 Object-Oriented Programming* (2nd Edition) by Dusty Phillips
+
+- **Sections covered**:
+  - Chapter 1: Case study 
+  - Based on chapter 1 all concept, i have started to build a project(image-toolkit) object oriented analysis and design part only.
+- **Duration**: 9pm – 11pm, 11.40pm - 12.10 am
+- **Mindset**: Building strong OOP foundations for future CV pipelines.
+- **Next will cover**: Will Continue project(image-toolkit) object oriented analysis and design part

@@ -1,6 +1,6 @@
 # Object Oriented Analysis(OOA),Object Oriented Design(OOD) and UML Diagram for Image-toolkit project
 
-Image-Toolkit: Full Project Description
+Image-Toolkit: Project Description
 ---------------------------------------
 Image-Toolkit is a command-line Python application that loads image files, applies a configurable pipeline of image filters (blur, grayscale, resize, enhance, etc.), and saves the processed output. It is designed to handle single images and batch folders, support user-defined "filter recipes" saved as JSON, and process large workloads efficiently using multiprocessing.
 
@@ -43,3 +43,28 @@ Actors are external entities that interact with the system:
 
 ### Use Case 5: Load Recipe
 * System deserializes JSON -> pipeline
+
+
+
+## Domain Modeling
+### Objects and Responsibilities
+| Object | Responsibility |
+| :--- | :--- |
+| **Image** | Represents a single image and its pixel data. |
+| **Filter** | Represents a transformation applied to an image. |
+| **Filter Pipeline** | An ordered sequence of filters. |
+| **Recipe** | Persisted configuration of a pipeline. |
+| **Batch** | A collection of images sourced from a folder. |
+| **Processing Unit (Worker)** | Executes the actual processing tasks. |
+| **Processing Manager** | Coordinates the execution of pipelines across multiple images. |
+
+### Conceptual relationships between them
+* **Pipeline & Filters**: A **Pipeline** acts as a container for multiple **Filters**, defining their execution order.
+* **Recipe & Pipeline**: A **Recipe** is the serialized description/template used to instantiate a **Pipeline**.
+* **Batch & Images**: A **Batch** represents a logical grouping of multiple **Images** for bulk processing.
+* **Processing Manager Coordination**: The **Processing Manager** serves as the central orchestrator, managing the interaction between:
+    * **Images**: the data to be processed.
+    * **Pipelines**: the logic to be applied.
+    * **Workers**: the computational resources executing the tasks.
+
+
