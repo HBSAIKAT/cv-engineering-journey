@@ -67,4 +67,3 @@ Actors are external entities that interact with the system:
     * **Pipelines**: the logic to be applied.
     * **Workers**: the computational resources executing the tasks.
 
-
