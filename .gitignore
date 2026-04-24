@@ -2,8 +2,12 @@ venv/
 __pycache__/
 *.pyc
  .ipynb_checkpoints/
-*.jpg
-*.png
+# *.jpg
+# *.png
+# allow diagrams images
+!Phase_01/**/diagrams/
+!Phase_01/**/diagrams/*.jpg
+!Phase_01/**/diagrams/*.png
 *.mp4
 models/
 datasets/
