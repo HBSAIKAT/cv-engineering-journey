@@ -185,7 +185,7 @@ Shows the overall flow of the Image-Toolkit system with decision points, branche
 
 Illustrates the layered architecture and dependencies between system components:
 
-![Class Diagram](Diagrams/05_Component_Package_Diagram.png)
+![Class Diagram](diagrams/05_Component_Package_Diagram.png)
 ### Architecture Layers:
 
 **1. UI/CLI Layer**
