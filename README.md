@@ -13,13 +13,14 @@
 ### Progress Tracker
 | Phase              | Status       | Projects | Books |
 |--------------------|--------------|----------|-------|
-| **01 Foundations** | In Progress  | 0/1      | **1/1** (in progress) |
+| **01 Foundations** | In Progress  | 1/1      | **1/1** (in progress) |
 
 ### Current Focus
 - **Python OOP** – Chapter 1 completed (Dusty Phillips – *Python 3 Object-Oriented Programming*)
+- **Building**: Image-Toolkit CLI project OOA/OOD and UML design flow
 
 ### Featured Projects
-Coming soon... (first project launching in Phase 01)
+- **Image-Toolkit** — CLI image-processing project; currently in OOA/OOD, UML diagram, and class-design phase
 
 ### Learning Docs
 - [📍 ROADMAP.md](./ROADMAP.md) – 12-month plan vs actual progress

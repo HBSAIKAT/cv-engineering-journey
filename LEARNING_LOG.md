@@ -50,3 +50,12 @@
 - **Duration**: 9am – 12:10pm
 - **Mindset**: Consolidating OOP design concepts with practical project structure.
 - **Next will cover**: Revise full Chapter 1 and reinforce all OOP concepts before moving forward.
+
+### 2026-04-25 | Day 6 | Python 3 OOP - Chapter 1
+- **Action**: Continued reading Chapter 1: Object-oriented Design from *Python 3 Object-Oriented Programming* (2nd Edition) by Dusty Phillips
+
+- **Sections covered**:
+  - Revise full Chapter 1
+- **Duration**: 10pm – 11:55pm
+- **Mindset**: Consolidating OOP design concepts with practical project structure.
+- **Next will cover**: Chapter 2: Topic- Creating python class
