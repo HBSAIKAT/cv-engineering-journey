@@ -72,3 +72,14 @@
 - **Duration**: 11am – 12:15pm
 - **Mindset**: Practicing how OOP works in real code.
 - **Next will cover**: Chapter 2: Topic- Who can access my data? and Third-party libraries
+
+
+
+### 2026-04-27 | Day 7 | Numpy
+- **Action**: Started studying Numpy fundamentals
+- **Sections covered**:
+  - Creating Numpy arrays
+  - Array attributes
+- **Duration**: 11:30pm – 12:30am
+- **Mindset**: Eager to apply Numpy concepts in practice
+- **Next will cover**: Array attributes will be continue
