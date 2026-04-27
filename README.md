@@ -16,7 +16,7 @@
 | **01 Foundations** | In Progress  | 1/1      | **1/1** (in progress) |
 
 ### Current Focus
-- **Python OOP** – Chapter 1 completed (Dusty Phillips – *Python 3 Object-Oriented Programming*)
+- **Python OOP** – Chapter 2 Started (Dusty Phillips – *Python 3 Object-Oriented Programming*)
 - **Building**: Image-Toolkit CLI project OOA/OOD and UML design flow
 
 ### Featured Projects
