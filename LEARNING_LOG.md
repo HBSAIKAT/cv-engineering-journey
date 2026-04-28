@@ -83,3 +83,14 @@
 - **Duration**: 11:30pm – 12:30am
 - **Mindset**: Eager to apply Numpy concepts in practice
 - **Next will cover**: Array attributes will be continue
+
+
+### 2026-04-28 | Day 8 | Python 3 OOP - Chapter 2
+- **Action**: Continued reading Chapter 2: Objects in Python from *Python 3 Object-Oriented Programming* (2nd Edition) by Dusty Phillips
+- **Sections covered**:
+  - Who can access my data?
+  - Third-party libraries
+  - Case study
+- **Duration**: 9:30pm – 11:00pm
+- **Mindset**: Practicing how OOP works in real code.
+- **Next will cover**: Excercise 
