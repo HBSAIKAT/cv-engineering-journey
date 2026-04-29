@@ -94,3 +94,13 @@
 - **Duration**: 9:30pm – 11:00pm
 - **Mindset**: Practicing how OOP works in real code.
 - **Next will cover**: Excercise 
+
+### 2026-04-29 | Day 9 | Numpy
+- **Action**: Continued studying Numpy fundamentals
+- **Sections covered**:
+  - Array functions and operations
+  - Array indexing techniques
+  - Array slicing operations
+- **Duration**: 9.30 pm - 11.15pm
+- **Mindset**: Building practical skills with array manipulation 
+- **Next will cover**: iteration, reshaping, stacking, splitting
