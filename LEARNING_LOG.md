@@ -104,3 +104,13 @@
 - **Duration**: 9.30 pm - 11.15pm
 - **Mindset**: Building practical skills with array manipulation 
 - **Next will cover**: iteration, reshaping, stacking, splitting
+
+
+
+### 2026-05-2 | Day 10 | Python 3 OOP - Chapter 2
+- **Action**: Completed Chapter 2 exercises and implementation
+- **Sections covered**:
+  - Excercise review and analysis based on chapter 2 concept
+- **Duration**: 9.00 pm - 10.00 pm
+- **Mindset**: Building practical skills with project demo coding
+- **Next will cover**: Revise chapter 1 and chapter 2 
