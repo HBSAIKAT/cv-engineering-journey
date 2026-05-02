@@ -114,3 +114,13 @@
 - **Duration**: 9.00 pm - 10.00 pm
 - **Mindset**: Building practical skills with project demo coding
 - **Next will cover**: Revise chapter 1 and chapter 2 
+
+
+### 2026-05-2 | Day 10 | Numpy
+- **Action**: Studying advanced Numpy concepts
+- **Sections covered**:
+  - Numpy array vs python list
+  - Advanced indexing (fancy indexing and boolean indexing)
+- **Duration**: 10.20 pm - 11.40 pm
+- **Mindset**: Understanding advanced Numpy concepts for efficient data manipulation
+- **Next will cover**: Broadcasting
