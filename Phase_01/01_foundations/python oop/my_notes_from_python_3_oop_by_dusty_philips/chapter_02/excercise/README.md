@@ -126,20 +126,6 @@ image.save("output.jpg")
 4. **Access control conventions** (underscore naming) guide proper API usage
 5. **Standard library modules** (like `json`) extend functionality
 
-## What This Implementation Does NOT Include
-
-⛔ **Chapter 2 restriction - NOT included (for future chapters):**
-- Inheritance (beyond basic `super()` for Filter)
-- Composition patterns
-- Magic methods (`__str__`, `__repr__`)
-- Property decorators
-- Context managers
-- Multiprocessing / Batch processing
-- Actual image loading (PIL/OpenCV)
-- Advanced design patterns
-
-These concepts will be introduced gradually in later chapters.
-
 ## Alignment with Chapter 1 Architecture
 
 This implementation respects the design from Chapter 1:
