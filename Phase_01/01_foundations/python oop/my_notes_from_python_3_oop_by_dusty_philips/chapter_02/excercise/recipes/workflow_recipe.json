@@ -1,0 +1,28 @@
+{
+  "name": "workflow_recipe",
+  "filters": [
+    {
+      "type": "BlurFilter",
+      "config": {
+        "radius": 2
+      }
+    },
+    {
+      "type": "GrayscaleFilter",
+      "config": {}
+    },
+    {
+      "type": "ResizeFilter",
+      "config": {
+        "width": 640,
+        "height": 480
+      }
+    },
+    {
+      "type": "EnhanceFilter",
+      "config": {
+        "level": 1.1
+      }
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "name": "enhancement_recipe",
+  "filters": [
+    {
+      "type": "BlurFilter",
+      "config": {
+        "radius": 7
+      }
+    },
+    {
+      "type": "EnhanceFilter",
+      "config": {
+        "level": 1.3
+      }
+    }
+  ]
+}
