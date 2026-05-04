@@ -124,3 +124,12 @@
 - **Duration**: 10.20 pm - 11.40 pm
 - **Mindset**: Understanding advanced Numpy concepts for efficient data manipulation
 - **Next will cover**: Broadcasting
+
+### 2026-05-2 | Day 11 | Numpy
+- **Action**: Studying advanced Numpy concepts
+- **Sections covered**:
+  - Broadcasting
+  - Mathematical operation
+- **Duration**: 7.40 pm - 9.10 pm
+- **Mindset**: Understanding advanced Numpy concepts for efficient data manipulation
+- **Next will cover**: Revise Numpy fundamental and advanced topis
