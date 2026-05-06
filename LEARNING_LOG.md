@@ -133,3 +133,20 @@
 - **Duration**: 7.40 pm - 9.10 pm
 - **Mindset**: Understanding advanced Numpy concepts for efficient data manipulation
 - **Next will cover**: Revise Numpy fundamental and advanced topis
+
+
+### 2026-05-6| Day 12 | Numpy | OOP
+- **Action**: Studying Numpy tricks and practical array manipulation functions
+- **Sections covered**:
+  - Revised pyhton oop chapter 1
+  - np.sort() 
+  - np.append() 
+  - np.concatenate()
+  - np.unique() 
+  - np.expand_dims()
+  - np.where() 
+  - np.argmax() 
+  - np.cumsum()
+- **Duration**: 9:40 pm - 10:20 pm
+- **Mindset**: Learning practical tricks to write efficient Numpy code and manipulate arrays effectively
+- **Next will cover**: Remaining numpy important methods will be cover and revise oop chapter 2
