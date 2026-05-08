@@ -150,3 +150,20 @@
 - **Duration**: 9:40 pm - 10:20 pm
 - **Mindset**: Learning practical tricks to write efficient Numpy code and manipulate arrays effectively
 - **Next will cover**: Remaining numpy important methods will be cover and revise oop chapter 2
+
+
+
+### 2026-05-8 | Day 13 | Numpy | OOP
+- **Action**: Completed numpy tricks portion and revised oop chapter 2
+- **Sections covered**:
+  - Revised python oop chapter 2
+  - np.percentile()
+  - np.histogram() 
+  - np.correcoef()
+  - np.isin() 
+  - np.flip()
+  - np.delete() 
+  - np.union1d(), np.intersect1d(), np.setdiff1d(), np.setxor1d()
+  - np.clip()
+- **Duration**: 11:00 am - 12:10 pm
+- **Mindset**: Learning practical tricks to write efficient Numpy code and manipulate arrays effectively
