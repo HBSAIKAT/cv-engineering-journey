@@ -167,3 +167,13 @@
   - np.clip()
 - **Duration**: 11:00 am - 12:10 pm
 - **Mindset**: Learning practical tricks to write efficient Numpy code and manipulate arrays effectively
+
+### 2026-05-12 | Day 14 | Python 3 OOP - Chapter 3
+- **Action**: Studied Python OOP Chapter 3 covering inheritance, polymorphism, and abstract base classes.
+- **Sections covered**:
+  - Basic inheritance
+  - Multiple inheritance
+  - Polymorphism
+  - Abstract base class
+- **Duration**: 9:00 am - 10:10 pm
+- **Mindset**: Focused on understanding core OOP concepts and their practical use.
