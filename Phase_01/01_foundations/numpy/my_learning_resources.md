@@ -7,3 +7,10 @@
 
 ### 3. Numpy Tricks
 ***https://www.youtube.com/live/jFBpnd0G09o***
+
+
+## Article: Visual numpy
+***https://jalammar.github.io/visual-numpy/***
+
+## Book: From python to numpy by Nicolas P. Rougier
+***https://www.labri.fr/perso/nrougier/from-python-to-numpy/***
