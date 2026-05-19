@@ -194,4 +194,5 @@
   - Demonstrated abstract base classes and duck-typed filter recognition
 - **Duration**: 10:00 am - 11:00 am
 - **Mindset**: Turning theory into hands-on examples for future project work.
+- **Next**: Revise chapter 3 full with chapter 2 and 1 also
 
