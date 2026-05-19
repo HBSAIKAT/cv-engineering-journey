@@ -184,3 +184,14 @@
   - Case study of real estate agent
 - **Duration**: 11:00 am - 12:10 pm
 - **Mindset**: Focused on understanding core OOP concepts and their practical use.
+
+### 2026-05-19 | Day 16 | Python 3 OOP - Chapter 3 Example
+- **Action**: Created Chapter 3 learning examples for the Image Toolkit project.
+- **Sections covered**:
+  - Applied inheritance and method overriding to `ImageHandler`
+  - Created mixin-based filters with multiple inheritance and MRO
+  - Built a polymorphic processor for filters
+  - Demonstrated abstract base classes and duck-typed filter recognition
+- **Duration**: 10:00 am - 11:00 am
+- **Mindset**: Turning theory into hands-on examples for future project work.
+
