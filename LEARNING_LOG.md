@@ -196,3 +196,12 @@
 - **Mindset**: Turning theory into hands-on examples for future project work.
 - **Next**: Revise chapter 3 full with chapter 2 and 1 also
 
+### 2026-05-21 | Day 17 | Started OpenCV
+- **Action**: Practiced OpenCV image transformation and manipulation 
+- **Sections covered**:
+  - Birth of OpenCV reason
+  - OpenCV Basics and Image Handling
+  - Image Transformation and Manipulation Techniques
+- **Duration**: 10:30 pm - 12:00 am
+- **Mindset**: Focused on applying OpenCV image transformation techniques in practice.
+- **Next**: OpenCV vedio tutorial phase 3 to 5
