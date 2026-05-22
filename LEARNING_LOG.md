@@ -204,4 +204,13 @@
   - Image Transformation and Manipulation Techniques
 - **Duration**: 10:30 pm - 12:00 am
 - **Mindset**: Focused on applying OpenCV image transformation techniques in practice.
-- **Next**: OpenCV vedio tutorial phase 3 to 5
+- **Next**: OpenCV vedio tutorial phase 3 and 4
+
+### 2026-05-22 | Day 18 | Started OpenCV
+- **Action**: Practiced OpenCV image drawing and vedio processing
+- **Sections covered**:
+  - Basic image drawing
+  - Vedio processing
+- **Duration**: 10:30 am - 12:10 pm
+- **Mindset**: Focused on applying OpenCV image drawing techniques and vedio processing
+- **Next**: OpenCV vedio tutorial phase 5 to 6
