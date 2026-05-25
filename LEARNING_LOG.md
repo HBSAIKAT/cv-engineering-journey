@@ -214,3 +214,14 @@
 - **Duration**: 10:30 am - 12:10 pm
 - **Mindset**: Focused on applying OpenCV image drawing techniques and vedio processing
 - **Next**: OpenCV vedio tutorial phase 5 to 6
+
+
+
+### 2026-05-25 | Day 19 | Started OpenCV
+- **Action**: Practiced OpenCV image processing techniqes
+- **Sections covered**:
+  - Image filtering and blurring
+  - Edge detection and thresholding
+- **Duration**: 11:30 am - 1:00 pm; 6:45 pm - 8:00 pm
+- **Mindset**: Focused on applying OpenCV image filtering, blurring, edge detection, and thresholding techniques.
+- **Next**: OpenCV video tutorial — phases 7–8
