@@ -225,3 +225,14 @@
 - **Duration**: 11:30 am - 1:00 pm; 6:45 pm - 8:00 pm
 - **Mindset**: Focused on applying OpenCV image filtering, blurring, edge detection, and thresholding techniques.
 - **Next**: OpenCV video tutorial — phases 7–8
+
+
+
+### 2026-05-29 | Day 20 | Started OpenCV
+- **Action**: Practiced OpenCV contours and shape detection
+- **Sections covered**:
+  - Contours
+  - Shape detection
+- **Duration**: 7:30 pm - 10:00 pm;
+- **Mindset**: Focused on applying OpenCV Finding contours, Drawing contours on images, Shape detection using approxPolyDP
+- **Next**: OpenCV video tutorial — phases 8 last part
