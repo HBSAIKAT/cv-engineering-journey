@@ -236,3 +236,14 @@
 - **Duration**: 7:30 pm - 10:00 pm;
 - **Mindset**: Focused on applying OpenCV Finding contours, Drawing contours on images, Shape detection using approxPolyDP
 - **Next**: OpenCV video tutorial — phases 8 last part
+
+
+### 2026-06-03 | Day 21 | OpenCV
+
+- **Action**: Practiced Face and Object Detection using Haar Cascades in OpenCV 
+- **Sections covered**:
+  - Face detection 
+  - Multi-feature detection — face, eye, and smile — using ROI-based cascade chaining
+- **Duration**: 10:00 AM – 12:05 PM;
+- **Mindset**: Focused on understanding how face detection work
+- **Next**: Full revision of OpenCV video tutorial notes
